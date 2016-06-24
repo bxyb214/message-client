@@ -4,36 +4,28 @@ import com.ibm.mq.*;
 import com.ibm.mq.constants.MQConstants;
 
 public class MQProducer {
-    private static final String qManager = "QM_Yan";
-    private static final String qName = "LQ01";
-
-//    private static final String qManager = "ESBQManager";
-//    private static final String qName = "LocalQueue1";
+    private static final String qManager = "QM_TIPS_2027100000_01";
+    private static final String qName = "PBC.2600.ONLINE.TRAN";
 
     public static void main(String args[]) {
         try {
-            MQEnvironment.hostname = "9.110.83.36";
+            MQEnvironment.hostname = "195.216.145.19";
             MQEnvironment.port = 1414;
-            MQEnvironment.channel = "CNN_Yan";
-            MQEnvironment.CCSID = 1381;
-//            MQEnvironment.hostname = "10.10.10.93";
-//            MQEnvironment.port = 1415;
-//            MQEnvironment.channel = "ESBQManagerChannel";
-
+            MQEnvironment.channel = "SVRCONN";
+            MQEnvironment.CCSID = 819;
 
 //            MQEnvironment.userID="Yan";
 //            MQEnvironment.password="O9i8u7y6";
             MQQueueManager qMgr = new MQQueueManager(qManager);
             int openOptions = MQConstants.MQOO_OUTPUT;
             MQQueue queue = qMgr.accessQueue(qName, openOptions);
-            for (int i=0;i<1000;i++){
-                MQMessage msg = new MQMessage();
-//                String message = "this message from mymgr";
-                String message = MQClientUtils.DEFAULT_PLACEORDER_PAYLOAD;
-                msg.writeUTF(message);
-                MQPutMessageOptions pmo = new MQPutMessageOptions();
-                queue.put(msg, pmo);
-            }
+
+            MQMessage msg = new MQMessage();
+            String message = MQClientUtils.DEFAULT_PLACEORDER_PAYLOAD;
+            msg.writeUTF(message);
+            MQPutMessageOptions pmo = new MQPutMessageOptions();
+            queue.put(msg, pmo);
+
             queue.close();
             qMgr.disconnect();
         } catch (MQException ex) {
