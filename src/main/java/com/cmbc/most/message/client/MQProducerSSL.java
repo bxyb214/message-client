@@ -13,7 +13,7 @@ public class MQProducerSSL {
     private static final String qManager = "SSLQM";
     private static final String qName = "localq";
     private static final String kpassword = "123456";
-    public static boolean sslEnabled = true;
+    private static boolean sslEnabled = true;
 
     public static void main(String args[]) {
         try {

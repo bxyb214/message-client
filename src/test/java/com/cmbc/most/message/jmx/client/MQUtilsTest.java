@@ -9,6 +9,6 @@ public class MQUtilsTest {
 
     public static void main(String[] args){
         MQClientUtils mqClientUtils = new MQClientUtils();
-        mqClientUtils.sendMessage("1111");
+//        mqClientUtils.sendMessage("1111");
     }
 }

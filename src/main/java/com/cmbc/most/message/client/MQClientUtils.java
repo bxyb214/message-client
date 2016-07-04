@@ -1,21 +1,12 @@
 package com.cmbc.most.message.client;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Properties;
-
-import com.cmbc.most.message.EMail;
-import com.cmbc.most.message.SMS;
+import com.ibm.disthub2.client.Message;
 import com.ibm.mq.*;
 import com.ibm.mq.constants.MQConstants;
 
 public class MQClientUtils {
 
-    public final static String DEFAULT_PLACEORDER_PAYLOAD = "<m:placeOrder xmlns:m=\"http://services.samples\">\n"
+    protected final static String DEFAULT_PLACEORDER_PAYLOAD = "<m:placeOrder xmlns:m=\"http://services.samples\">\n"
             + "\t<m:order>\n"
             + "\t\t<m:price>1</m:price>\n"
             + "\t\t<m:quantity>200</m:quantity>\n"
@@ -25,23 +16,6 @@ public class MQClientUtils {
 
     private static final String qManager = "QM_TIPS_2027100000_01";
     private static final String qName = "PBC.2600.ONLINE.TRAN";
-
-    /*
-     * EMail发送
-     */
-    public Boolean sendMessage(EMail message){
-        sendMessage("111");
-        return true;
-    }
-
-    /*
-     * 短信发送
-     */
-    public Boolean sendMessage(SMS message) {
-        sendMessage("222");
-        return true;
-    }
-
 
     private void ConnectMQ() {
         /**
@@ -55,7 +29,7 @@ public class MQClientUtils {
     /**
      * 读取MQ队列中的消息
      */
-    public String GetMessage(){
+    private String GetMessage(){
         String msgText="";
         try {
             //MQ连接
@@ -87,7 +61,7 @@ public class MQClientUtils {
      * MQ信息发送
      * 传入要发送的信息
      */
-    public void sendMessage(String message) {
+    private void sendMessage(String message) {
 
         try {
             //MQ连接
